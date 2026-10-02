@@ -1,1634 +1,1496 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
-
-  <title>Review GMB QR Generator</title>
-
-  <!-- QRCode.js - gratis, tidak membutuhkan login -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --primary: #6366f1;
-      --primary2: #8b5cf6;
-      --green: #22c55e;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --card: rgba(255,255,255,.075);
-      --border: rgba(255,255,255,.12);
-    }
-
-    body {
-      min-height: 100vh;
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-      color: var(--text);
-
-      background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(99,102,241,.30),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 90% 85%,
-          rgba(34,197,94,.18),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #020617,
-          #0f172a 45%,
-          #111827
-        );
-
-      overflow-x: hidden;
-    }
-
-    /* Background particles */
-
-    .orb {
-      position: fixed;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: .20;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .orb.one {
-      background: #6366f1;
-      top: 5%;
-      left: -80px;
-      animation: moveOrb 8s ease-in-out infinite alternate;
-    }
-
-    .orb.two {
-      background: #22c55e;
-      right: -80px;
-      bottom: 5%;
-      animation: moveOrb 10s ease-in-out infinite alternate-reverse;
-    }
-
-    @keyframes moveOrb {
-      from {
-        transform: translate(0,0);
-      }
-
-      to {
-        transform: translate(50px,-30px);
-      }
-    }
-
-    .container {
-      width: min(1080px, 92%);
-      margin: auto;
-      padding: 45px 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+
+<title>Terima Kasih — GMB Review</title>
+
+<!-- QR CODE GRATIS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue: #6366f1;
+  --purple: #8b5cf6;
+  --green: #22c55e;
+  --gold: #fbbf24;
+  --white: #ffffff;
+  --muted: #94a3b8;
+}
+
+body {
+  min-height: 100vh;
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  color: var(--white);
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(99,102,241,.28),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(34,197,94,.16),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #020617,
+      #0b1224,
+      #111827
+    );
+
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+
+.glow {
+  position: fixed;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .18;
+  pointer-events: none;
+}
+
+.glow.one {
+  background: #6366f1;
+  top: -80px;
+  left: -70px;
+  animation: glowMove 8s infinite alternate;
+}
+
+.glow.two {
+  background: #22c55e;
+  bottom: -80px;
+  right: -70px;
+  animation: glowMove 10s infinite alternate-reverse;
+}
 
-    /* Header */
+@keyframes glowMove {
+  from {
+    transform: translate(0,0);
+  }
+  to {
+    transform: translate(60px,-40px);
+  }
+}
 
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+/* CONTAINER */
 
-    .top-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
+.container {
+  width: min(1050px, 92%);
+  margin: auto;
+  padding: 45px 0;
+}
 
-      padding: 8px 15px;
-      border-radius: 100px;
+/* HEADER */
 
-      background: rgba(255,255,255,.07);
-      border: 1px solid var(--border);
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-      color: #c7d2fe;
-      font-size: 13px;
-      font-weight: 700;
+.badge {
+  display: inline-block;
 
-      margin-bottom: 18px;
-    }
+  padding: 8px 15px;
 
-    h1 {
-      font-size: clamp(34px, 7vw, 64px);
-      line-height: 1;
+  border-radius: 50px;
 
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #a5b4fc,
-          #6ee7b7
-        );
+  background: rgba(255,255,255,.07);
 
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+  border: 1px solid rgba(255,255,255,.12);
 
-    .subtitle {
-      max-width: 650px;
-      margin: 18px auto 0;
+  color: #c7d2fe;
 
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
+  font-size: 12px;
+  font-weight: 800;
 
-    /* Main */
+  margin-bottom: 18px;
+}
 
-    .main-card {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 25px;
+h1 {
+  font-size: clamp(38px, 7vw, 65px);
+  line-height: 1;
 
-      padding: 25px;
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #a5b4fc,
+      #6ee7b7
+    );
 
-      background: var(--card);
-      border: 1px solid var(--border);
+  -webkit-background-clip: text;
+  background-clip: text;
 
-      border-radius: 30px;
+  color: transparent;
+}
 
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+.subtitle {
+  max-width: 650px;
 
-      box-shadow:
-        0 30px 80px rgba(0,0,0,.35);
-    }
+  margin: 17px auto 0;
 
-    .panel {
-      padding: 20px;
-    }
+  color: var(--muted);
 
-    .panel-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
+  font-size: 15px;
 
-    .panel-desc {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-      margin-bottom: 22px;
-    }
+  line-height: 1.7;
+}
 
-    /* Upload */
+/* MAIN */
 
-    .upload-box {
-      position: relative;
+.card {
+  display: grid;
 
-      height: 190px;
+  grid-template-columns: .85fr 1.15fr;
 
-      border: 2px dashed rgba(255,255,255,.16);
-      border-radius: 22px;
+  gap: 25px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  padding: 25px;
 
-      text-align: center;
+  background:
+    rgba(255,255,255,.065);
 
-      overflow: hidden;
+  border:
+    1px solid rgba(255,255,255,.11);
 
-      background: rgba(0,0,0,.16);
+  border-radius: 30px;
 
-      cursor: pointer;
+  backdrop-filter: blur(25px);
 
-      transition: .3s;
-    }
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+}
 
-    .upload-box:hover {
-      border-color: #818cf8;
-      background: rgba(99,102,241,.07);
-    }
+/* LEFT */
 
-    .upload-content {
-      position: relative;
-      z-index: 2;
-    }
+.controls {
+  padding: 20px;
+}
 
-    .upload-icon {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+.title {
+  font-size: 21px;
+  font-weight: 800;
 
-    .upload-text {
-      font-weight: 700;
-    }
+  margin-bottom: 8px;
+}
 
-    .upload-sub {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 6px;
-    }
+.description {
+  color: var(--muted);
 
-    #imageInput {
-      display: none;
-    }
+  font-size: 13px;
 
-    #previewImage {
-      display: none;
+  line-height: 1.6;
 
-      position: absolute;
-      inset: 0;
+  margin-bottom: 25px;
+}
 
-      width: 100%;
-      height: 100%;
+label {
+  display: block;
 
-      object-fit: cover;
-    }
+  color: #cbd5e1;
 
-    /* Input */
+  font-size: 13px;
+  font-weight: 700;
 
-    .field {
-      margin-top: 20px;
-    }
+  margin-bottom: 9px;
+}
 
-    label {
-      display: block;
+input {
+  width: 100%;
 
-      color: #cbd5e1;
-      font-size: 13px;
-      font-weight: 700;
+  padding: 17px;
 
-      margin-bottom: 9px;
-    }
+  border-radius: 15px;
 
-    .input-wrap {
-      position: relative;
-    }
+  border:
+    1px solid rgba(255,255,255,.13);
 
-    input[type="url"] {
-      width: 100%;
+  outline: none;
 
-      padding: 16px 17px;
+  background:
+    rgba(0,0,0,.24);
 
-      border-radius: 15px;
+  color: white;
 
-      outline: none;
+  font-size: 14px;
 
-      border: 1px solid rgba(255,255,255,.12);
+  transition: .25s;
+}
 
-      color: white;
+input:focus {
+  border-color: #818cf8;
 
-      background: rgba(0,0,0,.25);
+  box-shadow:
+    0 0 0 4px rgba(99,102,241,.12);
+}
 
-      font-size: 14px;
+.generate {
+  width: 100%;
 
-      transition: .25s;
-    }
+  margin-top: 17px;
 
-    input[type="url"]:focus {
-      border-color: #818cf8;
+  padding: 16px;
 
-      box-shadow:
-        0 0 0 4px rgba(99,102,241,.12);
-    }
+  border: 0;
 
-    /* Button */
+  border-radius: 15px;
 
-    .generate-btn {
-      width: 100%;
+  cursor: pointer;
 
-      border: 0;
-      outline: 0;
+  color: white;
 
-      margin-top: 18px;
+  font-weight: 800;
 
-      padding: 16px;
+  font-size: 15px;
 
-      border-radius: 15px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
 
-      cursor: pointer;
+  box-shadow:
+    0 12px 30px rgba(99,102,241,.30);
 
-      color: white;
+  transition: .25s;
+}
 
-      font-size: 15px;
-      font-weight: 800;
+.generate:hover {
+  transform: translateY(-2px);
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary2)
-        );
+  box-shadow:
+    0 18px 40px rgba(99,102,241,.43);
+}
 
-      box-shadow:
-        0 12px 30px rgba(99,102,241,.28);
+.tip {
+  margin-top: 18px;
 
-      transition: .25s;
-    }
+  padding: 14px;
 
-    .generate-btn:hover {
-      transform: translateY(-2px);
+  border-radius: 15px;
 
-      box-shadow:
-        0 17px 38px rgba(99,102,241,.42);
-    }
+  background:
+    rgba(99,102,241,.07);
 
-    .generate-btn:active {
-      transform: scale(.98);
-    }
+  border:
+    1px solid rgba(99,102,241,.12);
 
-    /* Right preview */
+  color: #a5b4fc;
 
-    .preview {
-      min-height: 580px;
+  font-size: 12px;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+  line-height: 1.6;
+}
 
-      position: relative;
+/* RIGHT PREVIEW */
 
-      border-radius: 25px;
+.preview {
+  min-height: 600px;
 
-      background:
-        radial-gradient(
-          circle at 50% 20%,
-          rgba(99,102,241,.13),
-          transparent 35%
-        ),
-        rgba(0,0,0,.13);
+  border-radius: 25px;
 
-      overflow: hidden;
-    }
+  position: relative;
 
-    .preview-photo {
-      width: 92px;
-      height: 92px;
+  overflow: hidden;
 
-      border-radius: 50%;
+  display: flex;
 
-      object-fit: cover;
+  flex-direction: column;
 
-      border: 4px solid rgba(255,255,255,.15);
+  align-items: center;
 
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.35);
+  justify-content: center;
 
-      margin-bottom: 12px;
+  text-align: center;
 
-      display: none;
-    }
+  padding: 30px;
 
-    .business-placeholder {
-      width: 92px;
-      height: 92px;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(99,102,241,.12),
+      transparent 38%
+    );
+}
 
-      border-radius: 50%;
+.thank-title {
+  font-size: 24px;
 
-      display: grid;
-      place-items: center;
+  font-weight: 900;
+}
 
-      background:
-        linear-gradient(
-          135deg,
-          #4f46e5,
-          #7c3aed
-        );
+.thank-subtitle {
+  color: var(--muted);
 
-      font-size: 36px;
+  font-size: 13px;
 
-      margin-bottom: 12px;
-    }
+  margin-top: 7px;
+}
 
-    .preview h2 {
-      font-size: 22px;
-      text-align: center;
-    }
+/* AVATAR */
 
-    .preview-description {
-      color: var(--muted);
+.avatar-area {
+  position: relative;
 
-      text-align: center;
+  width: 330px;
+  height: 300px;
 
-      font-size: 13px;
+  margin-top: 15px;
+}
 
-      margin-top: 7px;
-    }
+.avatar {
+  position: absolute;
 
-    /* Avatar */
+  width: 145px;
+  height: 145px;
 
-    .avatar-area {
-      position: relative;
+  left: 92px;
+  top: 80px;
 
-      width: 260px;
-      height: 260px;
+  border-radius: 50%;
 
-      margin-top: 15px;
+  background:
+    linear-gradient(
+      145deg,
+      #ffdbbd,
+      #f2a16e
+    );
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  box-shadow:
+    inset -15px -18px 25px rgba(150,60,20,.13),
+    0 25px 45px rgba(0,0,0,.30);
 
-    .avatar-shadow {
-      position: absolute;
+  animation:
+    avatarFloat 3s ease-in-out infinite;
+}
 
-      bottom: 0;
+@keyframes avatarFloat {
+  0%,100% {
+    transform: translateY(0);
+  }
 
-      width: 150px;
-      height: 25px;
+  50% {
+    transform: translateY(-9px);
+  }
+}
 
-      background: rgba(0,0,0,.3);
+/* HAIR */
 
-      filter: blur(10px);
+.hair {
+  position: absolute;
 
-      border-radius: 50%;
-    }
+  width: 150px;
+  height: 78px;
 
-    .avatar {
-      position: relative;
+  top: -7px;
+  left: -2px;
 
-      width: 145px;
-      height: 145px;
+  border-radius:
+    80px 80px 35px 35px;
 
-      border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      #171327,
+      #302041
+    );
+}
 
-      background:
-        linear-gradient(
-          145deg,
-          #ffd9bd,
-          #f4a261
-        );
+.hair:before,
+.hair:after {
+  content: "";
 
-      box-shadow:
-        inset -15px -18px 25px rgba(150,60,20,.13),
-        0 25px 45px rgba(0,0,0,.3);
+  position: absolute;
 
-      animation: avatarFloat 3s ease-in-out infinite;
-    }
+  background: #241832;
 
-    @keyframes avatarFloat {
-      0%,100% {
-        transform: translateY(0);
-      }
+  border-radius: 30px;
+}
 
-      50% {
-        transform: translateY(-9px);
-      }
-    }
+.hair:before {
+  width: 40px;
+  height: 70px;
 
-    /* Hair */
+  left: 3px;
+  top: 28px;
 
-    .hair {
-      position: absolute;
+  transform: rotate(13deg);
+}
 
-      width: 150px;
-      height: 78px;
+.hair:after {
+  width: 35px;
+  height: 65px;
 
-      top: -8px;
-      left: -2px;
+  right: 3px;
+  top: 29px;
 
-      border-radius:
-        80px 80px 35px 35px;
+  transform: rotate(-13deg);
+}
 
-      background:
-        linear-gradient(
-          135deg,
-          #171327,
-          #302041
-        );
-    }
+/* EYES */
 
-    .hair::before {
-      content: "";
+.eye {
+  position: absolute;
 
-      position: absolute;
+  top: 62px;
 
-      width: 42px;
-      height: 65px;
+  width: 15px;
+  height: 20px;
 
-      left: 4px;
-      top: 30px;
+  border-radius: 50%;
 
-      background: #241832;
+  background: #172033;
 
-      border-radius: 30px;
+  animation:
+    blink 4s infinite;
+}
 
-      transform: rotate(14deg);
-    }
+.eye.left {
+  left: 38px;
+}
 
-    .hair::after {
-      content: "";
+.eye.right {
+  right: 38px;
+}
 
-      position: absolute;
+.eye:after {
+  content: "";
 
-      width: 35px;
-      height: 60px;
+  position: absolute;
 
-      right: 4px;
-      top: 30px;
+  width: 5px;
+  height: 5px;
 
-      background: #241832;
+  border-radius: 50%;
 
-      border-radius: 30px;
+  background: white;
 
-      transform: rotate(-14deg);
-    }
+  left: 4px;
+  top: 4px;
+}
 
-    /* Eyes */
+@keyframes blink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
 
-    .eye {
-      position: absolute;
+  94% {
+    transform: scaleY(.08);
+  }
+}
 
-      top: 63px;
+/* CHEEK */
 
-      width: 15px;
-      height: 20px;
+.cheek {
+  position: absolute;
 
-      border-radius: 50%;
+  top: 91px;
 
-      background: #172033;
+  width: 28px;
+  height: 12px;
 
-      animation: blink 4s infinite;
-    }
+  border-radius: 50%;
 
-    .eye.left {
-      left: 38px;
-    }
+  background:
+    rgba(255,70,90,.22);
+}
 
-    .eye.right {
-      right: 38px;
-    }
+.cheek.left {
+  left: 18px;
+}
 
-    @keyframes blink {
-      0%, 90%, 100% {
-        transform: scaleY(1);
-      }
+.cheek.right {
+  right: 18px;
+}
 
-      94% {
-        transform: scaleY(.08);
-      }
-    }
+/* SMILE */
 
-    /* Eye sparkle */
+.mouth {
+  position: absolute;
 
-    .eye::after {
-      content: "";
+  width: 44px;
+  height: 24px;
 
-      position: absolute;
+  top: 90px;
+  left: 50%;
 
-      width: 5px;
-      height: 5px;
+  transform:
+    translateX(-50%);
 
-      background: white;
+  border-bottom:
+    5px solid #a44251;
 
-      border-radius: 50%;
+  border-radius:
+    0 0 50px 50px;
+}
 
-      top: 4px;
-      left: 4px;
-    }
+/* BODY */
 
-    /* Cheeks */
+.body {
+  position: absolute;
 
-    .cheek {
-      position: absolute;
+  width: 120px;
+  height: 95px;
 
-      top: 92px;
+  left: 12px;
+  top: 120px;
 
-      width: 27px;
-      height: 12px;
+  border-radius:
+    65px 65px 20px 20px;
 
-      border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #4338ca
+    );
+}
 
-      background: rgba(255,70,90,.22);
-    }
+/* HANDS */
 
-    .cheek.left {
-      left: 18px;
-    }
+.hand {
+  position: absolute;
 
-    .cheek.right {
-      right: 18px;
-    }
+  width: 52px;
+  height: 25px;
 
-    /* Smile */
+  top: 158px;
 
-    .mouth {
-      position: absolute;
+  border-radius: 30px;
 
-      width: 43px;
-      height: 23px;
+  background:
+    linear-gradient(
+      135deg,
+      #ffd0aa,
+      #f0a070
+    );
 
-      left: 50%;
-      top: 91px;
+  z-index: 5;
+}
 
-      transform: translateX(-50%);
+/* left hand */
 
-      border-bottom:
-        5px solid #a44251;
+.hand.left {
+  left: -32px;
 
-      border-radius:
-        0 0 50px 50px;
-    }
+  transform-origin: right center;
 
-    /* Body */
+  animation:
+    waveLeft .8s ease-in-out infinite alternate;
+}
 
-    .avatar-body {
-      position: absolute;
+/* right hand */
 
-      width: 120px;
-      height: 90px;
+.hand.right {
+  right: -32px;
 
-      left: 12px;
-      top: 120px;
+  transform-origin: left center;
 
-      border-radius:
-        65px 65px 20px 20px;
+  animation:
+    waveRight .8s ease-in-out infinite alternate;
+}
 
-      background:
-        linear-gradient(
-          135deg,
-          #6366f1,
-          #4338ca
-        );
-    }
+@keyframes waveLeft {
+  from {
+    transform:
+      rotate(-20deg);
+  }
 
-    /* Hands */
+  to {
+    transform:
+      rotate(-55deg);
+  }
+}
 
-    .hand {
-      position: absolute;
+@keyframes waveRight {
+  from {
+    transform:
+      rotate(20deg);
+  }
 
-      top: 155px;
+  to {
+    transform:
+      rotate(55deg);
+  }
+}
 
-      width: 47px;
-      height: 22px;
+/* HAND PALM */
 
-      border-radius: 30px;
+.hand:after {
+  content: "✋";
 
-      background: #f3aa7d;
+  position: absolute;
 
-      z-index: -1;
-    }
+  font-size: 27px;
 
-    .hand.left {
-      left: -25px;
+  top: -10px;
+}
 
-      transform: rotate(-30deg);
+.hand.left:after {
+  left: -4px;
+}
 
-      animation:
-        waveLeft .8s ease-in-out infinite alternate;
-    }
+.hand.right:after {
+  right: -4px;
 
-    .hand.right {
-      right: -25px;
+  transform:
+    scaleX(-1);
+}
 
-      transform: rotate(30deg);
+/* SPEECH */
 
-      animation:
-        waveRight .8s ease-in-out infinite alternate;
-    }
+.speech {
+  position: absolute;
 
-    @keyframes waveLeft {
-      from {
-        transform: rotate(-25deg);
-      }
+  right: -3px;
+  top: 0;
 
-      to {
-        transform: rotate(-52deg);
-      }
-    }
+  width: 235px;
 
-    @keyframes waveRight {
-      from {
-        transform: rotate(25deg);
-      }
+  padding: 15px 17px;
 
-      to {
-        transform: rotate(52deg);
-      }
-    }
+  color: #172033;
 
-    /* Speech */
+  background: white;
 
-    .speech {
-      position: absolute;
+  border-radius:
+    19px 19px 5px 19px;
 
-      top: 15px;
-      right: 8px;
+  font-size: 13px;
 
-      max-width: 250px;
+  font-weight: 800;
 
-      padding: 14px 18px;
+  line-height: 1.5;
 
-      color: #172033;
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.25);
 
-      background: white;
+  animation:
+    speechFloat 2.5s ease-in-out infinite;
+}
 
-      border-radius:
-        18px 18px 5px 18px;
+.speech:after {
+  content: "";
 
-      font-size: 13px;
-      font-weight: 800;
+  position: absolute;
 
-      line-height: 1.45;
+  bottom: -9px;
 
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.25);
+  right: 25px;
 
-      animation:
-        speechFloat 2.5s ease-in-out infinite;
-    }
+  width: 18px;
+  height: 18px;
 
-    .speech::after {
-      content: "";
+  background: white;
 
-      position: absolute;
+  transform:
+    rotate(45deg);
+}
 
-      bottom: -9px;
-      right: 28px;
+.speech small {
+  display: block;
 
-      width: 18px;
-      height: 18px;
+  color: #6366f1;
 
-      background: white;
+  font-size: 10px;
 
-      transform: rotate(45deg);
-    }
+  margin-top: 5px;
+}
 
-    @keyframes speechFloat {
-      0%,100% {
-        transform: translateY(0);
-      }
+@keyframes speechFloat {
+  0%,100% {
+    transform: translateY(0);
+  }
 
-      50% {
-        transform: translateY(-5px);
-      }
-    }
+  50% {
+    transform: translateY(-5px);
+  }
+}
 
-    .speech span {
-      display: block;
+/* WISDOM */
 
-      color: #6366f1;
+.wisdom {
+  max-width: 450px;
 
-      font-size: 11px;
+  margin-top: 0;
 
-      margin-top: 5px;
-    }
+  padding: 15px 20px;
 
-    /* Stars */
+  border-radius: 17px;
 
-    .stars {
-      display: flex;
+  background:
+    rgba(255,255,255,.045);
 
-      gap: 5px;
+  border:
+    1px solid rgba(255,255,255,.08);
 
-      margin-top: 5px;
+  color: #cbd5e1;
 
-      font-size: 25px;
+  font-size: 13px;
 
-      color: #fbbf24;
+  line-height: 1.65;
 
-      animation: starsIn .8s ease;
-    }
+  font-style: italic;
+}
 
-    .stars span {
-      animation: starPulse 1.3s infinite alternate;
-    }
+.wisdom strong {
+  color: #6ee7b7;
+}
 
-    .stars span:nth-child(2) {
-      animation-delay: .1s;
-    }
+/* STARS */
 
-    .stars span:nth-child(3) {
-      animation-delay: .2s;
-    }
+.stars {
+  display: flex;
 
-    .stars span:nth-child(4) {
-      animation-delay: .3s;
-    }
+  gap: 4px;
 
-    .stars span:nth-child(5) {
-      animation-delay: .4s;
-    }
+  margin-top: 15px;
 
-    @keyframes starPulse {
-      to {
-        transform: scale(1.15) rotate(5deg);
-      }
-    }
+  color: var(--gold);
 
-    @keyframes starsIn {
-      from {
-        opacity: 0;
-        transform: scale(.5);
-      }
+  font-size: 25px;
+}
 
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+.stars span {
+  animation:
+    starPulse 1.2s infinite alternate;
+}
 
-    .scan-note {
-      color: var(--muted);
+.stars span:nth-child(2) {
+  animation-delay: .1s;
+}
 
-      font-size: 12px;
+.stars span:nth-child(3) {
+  animation-delay: .2s;
+}
 
-      text-align: center;
+.stars span:nth-child(4) {
+  animation-delay: .3s;
+}
 
-      margin-top: 5px;
-    }
+.stars span:nth-child(5) {
+  animation-delay: .4s;
+}
 
-    /* QR */
+@keyframes starPulse {
+  to {
+    transform:
+      scale(1.18)
+      rotate(5deg);
+  }
+}
 
-    .qr-wrapper {
-      display: none;
+/* QR */
 
-      margin-top: 14px;
+.qr-box {
+  display: none;
 
-      padding: 14px;
+  margin-top: 18px;
 
-      background: white;
+  padding: 14px;
 
-      border-radius: 18px;
+  border-radius: 18px;
 
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.3);
+  background: white;
 
-      animation:
-        qrAppear .6s ease;
-    }
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.35);
 
-    @keyframes qrAppear {
-      from {
-        opacity: 0;
-        transform: scale(.7) rotate(-5deg);
-      }
+  animation:
+    qrIn .6s ease;
+}
 
-      to {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-      }
-    }
+@keyframes qrIn {
+  from {
+    opacity: 0;
+    transform:
+      scale(.7);
+  }
 
-    #qrcode img,
-    #qrcode canvas {
-      display: block;
-      max-width: 100%;
-    }
+  to {
+    opacity: 1;
+    transform:
+      scale(1);
+  }
+}
 
-    .download-btn {
-      display: none;
+#qrcode canvas,
+#qrcode img {
+  display: block;
+}
 
-      border: 0;
+/* DOWNLOAD */
 
-      margin-top: 12px;
+.download {
+  display: none;
 
-      padding: 11px 18px;
+  margin-top: 12px;
 
-      border-radius: 12px;
+  padding: 11px 18px;
 
-      cursor: pointer;
+  border: 0;
 
-      color: #0f172a;
+  border-radius: 12px;
 
-      background: white;
+  background: white;
 
-      font-size: 13px;
-      font-weight: 800;
-    }
+  color: #111827;
 
-    /* Status */
+  cursor: pointer;
 
-    .status {
-      display: none;
+  font-weight: 800;
 
-      margin-top: 12px;
+  font-size: 12px;
+}
 
-      padding: 10px 15px;
+/* STATUS */
 
-      border-radius: 12px;
+.status {
+  display: none;
 
-      background: rgba(34,197,94,.10);
+  margin-top: 10px;
 
-      border: 1px solid rgba(34,197,94,.2);
+  padding: 9px 14px;
 
-      color: #86efac;
+  border-radius: 12px;
 
-      font-size: 12px;
+  color: #86efac;
 
-      text-align: center;
-    }
+  background:
+    rgba(34,197,94,.09);
 
-    /* Confetti */
+  border:
+    1px solid rgba(34,197,94,.15);
 
-    .confetti {
-      position: fixed;
+  font-size: 11px;
+}
 
-      top: -20px;
+/* CONFETTI */
 
-      width: 9px;
-      height: 15px;
+.confetti {
+  position: fixed;
 
-      z-index: 100;
+  top: -20px;
 
-      pointer-events: none;
+  width: 8px;
+  height: 13px;
 
-      animation:
-        confettiFall 3.5s linear forwards;
-    }
+  z-index: 100;
 
-    @keyframes confettiFall {
-      to {
-        transform:
-          translateY(110vh)
-          rotate(720deg);
+  pointer-events: none;
 
-        opacity: 0;
-      }
-    }
+  animation:
+    fall 3.5s linear forwards;
+}
 
-    footer {
-      text-align: center;
+@keyframes fall {
+  to {
+    transform:
+      translateY(110vh)
+      rotate(720deg);
 
-      margin-top: 25px;
+    opacity: 0;
+  }
+}
 
-      color: #64748b;
+/* FOOTER */
 
-      font-size: 12px;
-    }
+footer {
+  text-align: center;
 
-    /* Mobile */
+  color: #64748b;
 
-    @media (max-width: 800px) {
+  font-size: 12px;
 
-      .container {
-        padding: 25px 0;
-      }
+  margin-top: 25px;
+}
 
-      .main-card {
-        grid-template-columns: 1fr;
+/* MOBILE */
 
-        padding: 15px;
+@media(max-width:800px) {
 
-        border-radius: 24px;
-      }
+  .container {
+    padding: 25px 0;
+  }
 
-      .panel {
-        padding: 15px;
-      }
+  .card {
+    grid-template-columns: 1fr;
 
-      .preview {
-        min-height: 600px;
-      }
+    padding: 14px;
+  }
 
-      .speech {
-        top: 8px;
-        right: 0;
+  .controls {
+    padding: 15px;
+  }
 
-        max-width: 210px;
-      }
-    }
+  .preview {
+    min-height: 650px;
+  }
+}
 
-    @media (max-width: 480px) {
+@media(max-width:480px) {
 
-      h1 {
-        font-size: 38px;
-      }
+  .avatar-area {
+    transform:
+      scale(.82);
 
-      .avatar-area {
-        transform: scale(.9);
-      }
+    margin-left:
+      -20px;
 
-      .speech {
-        font-size: 12px;
-      }
-    }
-  </style>
+    margin-right:
+      -20px;
+  }
+
+  h1 {
+    font-size: 39px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-  <div class="orb one"></div>
-  <div class="orb two"></div>
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-  <div class="container">
 
-    <header>
+<div class="container">
 
-      <div class="top-badge">
-        ⭐ GMB REVIEW QR GENERATOR
+  <header>
+
+    <div class="badge">
+      ⭐ GOOGLE BUSINESS REVIEW
+    </div>
+
+    <h1>
+      Terima Kasih
+    </h1>
+
+    <p class="subtitle">
+      Bagikan pengalaman Anda melalui review.
+      Setiap masukan membantu kami tumbuh,
+      belajar, dan memberikan pelayanan yang lebih baik.
+    </p>
+
+  </header>
+
+
+  <main class="card">
+
+    <!-- LEFT -->
+
+    <section class="controls">
+
+      <div class="title">
+        🔗 Buat QR Review
       </div>
 
-      <h1>
-        Scan & Review
-      </h1>
-
-      <p class="subtitle">
-        Buat QR Code review bisnis Anda dengan mudah.
-        Pelanggan cukup scan menggunakan kamera HP.
-      </p>
-
-    </header>
+      <div class="description">
+        Masukkan link review Google Business Profile
+        Anda. QR Code akan dibuat otomatis di halaman ini.
+      </div>
 
 
-    <main class="main-card">
+      <label for="reviewLink">
+        Link Review Google
+      </label>
 
-      <!-- LEFT -->
-
-      <section class="panel">
-
-        <div class="panel-title">
-          Buat QR Review
-        </div>
-
-        <p class="panel-desc">
-          Upload foto bisnis dan masukkan link review Google
-          Business Profile Anda.
-        </p>
+      <input
+        id="reviewLink"
+        type="url"
+        placeholder="https://g.page/r/xxxxx/review"
+        autocomplete="off"
+      >
 
 
-        <!-- Upload -->
-
-        <label>
-          Foto Bisnis
-        </label>
-
-        <label
-          class="upload-box"
-          for="imageInput"
-        >
-
-          <div class="upload-content">
-
-            <div class="upload-icon">
-              📸
-            </div>
-
-            <div class="upload-text">
-              Klik untuk upload gambar
-            </div>
-
-            <div class="upload-sub">
-              JPG, PNG atau WEBP
-            </div>
-
-          </div>
-
-          <img
-            id="previewImage"
-            alt="Preview bisnis"
-          >
-
-        </label>
-
-        <input
-          type="file"
-          id="imageInput"
-          accept="image/*"
-        >
+      <button
+        class="generate"
+        onclick="generateQR()"
+      >
+        ✨ Generate QR Code
+      </button>
 
 
-        <!-- Link -->
+      <div class="tip">
 
-        <div class="field">
+        💡 <strong>Tips:</strong><br>
 
-          <label for="reviewLink">
-            Link Review Google
-          </label>
+        Gunakan link review Google Business Profile
+        yang langsung mengarahkan pelanggan ke halaman
+        pemberian review.
 
-          <input
-            type="url"
-            id="reviewLink"
-            placeholder="https://g.page/r/xxxx/review"
-            autocomplete="off"
-          >
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <section class="preview">
+
+      <div class="thank-title">
+        Terima Kasih ❤️
+      </div>
+
+      <div class="thank-subtitle">
+        Suara Anda berarti bagi kami
+      </div>
+
+
+      <!-- AVATAR -->
+
+      <div class="avatar-area">
+
+        <div class="avatar">
+
+          <div class="hair"></div>
+
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+
+          <div class="cheek left"></div>
+          <div class="cheek right"></div>
+
+          <div class="mouth"></div>
+
+          <div class="body"></div>
+
+          <!-- DUA TANGAN -->
+
+          <div class="hand left"></div>
+          <div class="hand right"></div>
 
         </div>
 
 
-        <button
-          class="generate-btn"
-          onclick="generateQR()"
-        >
-          ✨ Buat QR Code Review
-        </button>
+        <!-- SPEECH -->
 
-      </section>
+        <div class="speech">
 
+          👋 Terima kasih sudah
+          memberikan review!
 
-      <!-- RIGHT -->
-
-      <section class="preview">
-
-        <!-- Business image -->
-
-        <img
-          class="preview-photo"
-          id="previewPhoto"
-          alt="Foto bisnis"
-        >
-
-        <div
-          class="business-placeholder"
-          id="placeholder"
-        >
-          🏪
-        </div>
-
-
-        <h2>
-          Terima Kasih! ❤️
-        </h2>
-
-        <p class="preview-description">
-          Scan QR untuk memberikan review
-        </p>
-
-
-        <!-- Avatar -->
-
-        <div class="avatar-area">
-
-          <div class="avatar-shadow"></div>
-
-          <div class="avatar">
-
-            <div class="hair"></div>
-
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-
-            <div class="cheek left"></div>
-            <div class="cheek right"></div>
-
-            <div class="mouth"></div>
-
-            <div class="avatar-body"></div>
-
-            <div class="hand left"></div>
-            <div class="hand right"></div>
-
-          </div>
-
-
-          <div class="speech">
-
-            👋 Terima kasih sudah
-            memberikan review!
-
-            <span>
-              Feedback Anda sangat berarti bagi kami ❤️
-            </span>
-
-          </div>
+          <small>
+            Feedback Anda sangat berarti ❤️
+          </small>
 
         </div>
 
+      </div>
 
-        <!-- Stars -->
 
-        <div class="stars">
+      <!-- WISDOM -->
 
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
+      <div class="wisdom">
 
-        </div>
+        “<strong>Setiap masukan adalah langkah kecil
+        menuju perubahan yang lebih baik.</strong>
+        Terus melangkah, terus bertumbuh,
+        dan jadikan setiap pengalaman sebagai
+        kesempatan untuk menjadi lebih baik.”
 
-        <div class="scan-note">
-          Arahkan kamera HP ke QR Code
-        </div>
+      </div>
 
 
-        <!-- QR -->
+      <!-- STARS -->
 
-        <div
-          class="qr-wrapper"
-          id="qrWrapper"
-        >
+      <div class="stars">
 
-          <div id="qrcode"></div>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
 
-        </div>
+      </div>
 
 
-        <button
-          class="download-btn"
-          id="downloadBtn"
-          onclick="downloadQR()"
-        >
-          📥 Download QR Code
-        </button>
+      <div class="qr-box" id="qrBox">
 
+        <div id="qrcode"></div>
 
-        <div
-          class="status"
-          id="status"
-        >
-          ✓ QR Code berhasil dibuat
-        </div>
+      </div>
 
-      </section>
 
-    </main>
+      <button
+        class="download"
+        id="downloadBtn"
+        onclick="downloadQR()"
+      >
+        📥 Download QR Code
+      </button>
 
 
-    <footer>
-      Dibuat dengan HTML, CSS & JavaScript · Tanpa login
-    </footer>
+      <div
+        class="status"
+        id="status"
+      >
+        ✓ QR Code berhasil dibuat
+      </div>
 
-  </div>
+    </section>
 
+  </main>
 
-  <script>
 
-    let currentQRCanvas = null;
+  <footer>
+    Gratis · Tanpa Login · Tanpa Database
+  </footer>
 
+</div>
 
-    /*
-      =====================================
-      PREVIEW IMAGE
-      =====================================
-    */
 
-    document
-      .getElementById("imageInput")
-      .addEventListener("change", function(event) {
+<script>
 
-        const file = event.target.files[0];
+/*
+=========================================
+GENERATE QR
+=========================================
+*/
 
-        if (!file) return;
+function generateQR() {
 
-        if (!file.type.startsWith("image/")) {
+  const input =
+    document.getElementById("reviewLink");
 
-          alert("Silakan pilih file gambar.");
+  const link =
+    input.value.trim();
 
-          return;
-        }
+  const qr =
+    document.getElementById("qrcode");
 
-        const reader = new FileReader();
+  const box =
+    document.getElementById("qrBox");
 
-        reader.onload = function(e) {
+  const download =
+    document.getElementById("downloadBtn");
 
-          const image =
-            document.getElementById("previewImage");
+  const status =
+    document.getElementById("status");
 
-          const photo =
-            document.getElementById("previewPhoto");
 
-          const placeholder =
-            document.getElementById("placeholder");
+  /*
+  VALIDASI
+  */
 
+  if (!link) {
 
-          image.src = e.target.result;
+    alert(
+      "Masukkan link review Google terlebih dahulu."
+    );
 
-          image.style.display = "block";
+    input.focus();
 
-          photo.src = e.target.result;
+    return;
+  }
 
-          photo.style.display = "block";
 
-          placeholder.style.display = "none";
-        };
+  /*
+  VALIDASI URL
+  */
 
-        reader.readAsDataURL(file);
+  try {
 
-      });
+    const url =
+      new URL(link);
 
+    if (
+      url.protocol !== "http:" &&
+      url.protocol !== "https:"
+    ) {
 
-    /*
-      =====================================
-      GENERATE QR
-      =====================================
-    */
-
-    function generateQR() {
-
-      const link =
-        document
-          .getElementById("reviewLink")
-          .value
-          .trim();
-
-      const qrContainer =
-        document.getElementById("qrcode");
-
-      const qrWrapper =
-        document.getElementById("qrWrapper");
-
-      const downloadBtn =
-        document.getElementById("downloadBtn");
-
-      const status =
-        document.getElementById("status");
-
-
-      /*
-        Validasi
-      */
-
-      if (!link) {
-
-        alert(
-          "Silakan masukkan link review Google terlebih dahulu."
-        );
-
-        document
-          .getElementById("reviewLink")
-          .focus();
-
-        return;
-      }
-
-
-      /*
-        Validasi URL
-      */
-
-      try {
-
-        new URL(link);
-
-      } catch {
-
-        alert(
-          "Link tidak valid. Pastikan diawali https://"
-        );
-
-        return;
-      }
-
-
-      /*
-        Bersihkan QR lama
-      */
-
-      qrContainer.innerHTML = "";
-
-
-      /*
-        Buat QR baru
-      */
-
-      new QRCode(qrContainer, {
-
-        text: link,
-
-        width: 190,
-
-        height: 190,
-
-        colorDark: "#111827",
-
-        colorLight: "#ffffff",
-
-        correctLevel:
-          QRCode.CorrectLevel.H
-
-      });
-
-
-      qrWrapper.style.display = "block";
-
-      downloadBtn.style.display = "inline-block";
-
-      status.style.display = "block";
-
-
-      /*
-        Confetti
-      */
-
-      createConfetti();
-
-
-      /*
-        Ubah ucapan avatar
-      */
-
-      const speech =
-        document.querySelector(".speech");
-
-      speech.innerHTML = `
-        🎉 QR Code siap!
-        <span>
-          Terima kasih sudah memberikan review!
-        </span>
-      `;
-
-
-      /*
-        Ambil canvas QR setelah dibuat
-      */
-
-      setTimeout(() => {
-
-        currentQRCanvas =
-          qrContainer.querySelector("canvas");
-
-      }, 300);
+      throw new Error();
 
     }
 
+  } catch {
 
-    /*
-      =====================================
-      DOWNLOAD QR
-      =====================================
-    */
+    alert(
+      "Link tidak valid. Gunakan link yang diawali https://"
+    );
 
-    function downloadQR() {
-
-      const qrContainer =
-        document.getElementById("qrcode");
-
-      const canvas =
-        qrContainer.querySelector("canvas");
-
-      if (!canvas) {
-
-        alert(
-          "Buat QR Code terlebih dahulu."
-        );
-
-        return;
-      }
+    return;
+  }
 
 
-      /*
-        Tambahkan background putih
-        supaya hasil download bersih
-      */
+  /*
+  HAPUS QR LAMA
+  */
 
-      const padding = 30;
-
-      const output =
-        document.createElement("canvas");
-
-      output.width =
-        canvas.width + padding * 2;
-
-      output.height =
-        canvas.height + padding * 2 + 35;
-
-      const ctx =
-        output.getContext("2d");
+  qr.innerHTML = "";
 
 
-      ctx.fillStyle = "#ffffff";
+  /*
+  BUAT QR
+  */
 
-      ctx.fillRect(
-        0,
-        0,
-        output.width,
-        output.height
-      );
+  new QRCode(qr, {
 
+    text: link,
 
-      ctx.drawImage(
-        canvas,
-        padding,
-        padding
-      );
+    width: 190,
 
+    height: 190,
 
-      ctx.fillStyle = "#111827";
+    colorDark: "#111827",
 
-      ctx.font =
-        "bold 13px Arial";
+    colorLight: "#ffffff",
 
-      ctx.textAlign =
-        "center";
+    correctLevel:
+      QRCode.CorrectLevel.H
 
-      ctx.fillText(
-        "Scan untuk memberikan review",
-        output.width / 2,
-        output.height - 12
-      );
+  });
 
 
-      /*
-        Download
-      */
+  box.style.display =
+    "block";
 
-      const link =
-        document.createElement("a");
+  download.style.display =
+    "inline-block";
 
-      link.download =
-        "QR-Review-GMB.png";
-
-      link.href =
-        output.toDataURL("image/png");
-
-      link.click();
-
-    }
+  status.style.display =
+    "block";
 
 
-    /*
-      =====================================
-      CONFETTI
-      =====================================
-    */
+  /*
+  UBah TEKS AVATAR
+  */
 
-    function createConfetti() {
+  document.querySelector(".speech").innerHTML = `
+    🎉 QR Code siap!
+    <small>
+      Terima kasih sudah memberikan review! ❤️
+    </small>
+  `;
 
-      const colors = [
-        "#6366f1",
-        "#8b5cf6",
-        "#22c55e",
-        "#fbbf24",
-        "#f472b6",
-        "#38bdf8",
-        "#fb7185"
+
+  /*
+  CONFETTI
+  */
+
+  createConfetti();
+
+}
+
+
+/*
+=========================================
+DOWNLOAD QR
+=========================================
+*/
+
+function downloadQR() {
+
+  const canvas =
+    document.querySelector(
+      "#qrcode canvas"
+    );
+
+  if (!canvas) {
+
+    alert(
+      "Generate QR Code terlebih dahulu."
+    );
+
+    return;
+  }
+
+
+  const padding = 30;
+
+  const output =
+    document.createElement("canvas");
+
+  output.width =
+    canvas.width + padding * 2;
+
+  output.height =
+    canvas.height + padding * 2 + 45;
+
+
+  const ctx =
+    output.getContext("2d");
+
+
+  /*
+  BACKGROUND PUTIH
+  */
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.fillRect(
+    0,
+    0,
+    output.width,
+    output.height
+  );
+
+
+  /*
+  QR
+  */
+
+  ctx.drawImage(
+    canvas,
+    padding,
+    padding
+  );
+
+
+  /*
+  LABEL
+  */
+
+  ctx.fillStyle =
+    "#111827";
+
+  ctx.font =
+    "bold 13px Arial";
+
+  ctx.textAlign =
+    "center";
+
+  ctx.fillText(
+    "Scan untuk memberikan review",
+    output.width / 2,
+    output.height - 14
+  );
+
+
+  /*
+  DOWNLOAD
+  */
+
+  const a =
+    document.createElement("a");
+
+  a.download =
+    "QR-Review-GMB.png";
+
+  a.href =
+    output.toDataURL("image/png");
+
+  a.click();
+
+}
+
+
+/*
+=========================================
+CONFETTI
+=========================================
+*/
+
+function createConfetti() {
+
+  const colors = [
+    "#6366f1",
+    "#8b5cf6",
+    "#22c55e",
+    "#fbbf24",
+    "#f472b6",
+    "#38bdf8",
+    "#fb7185"
+  ];
+
+
+  for (
+    let i = 0;
+    i < 80;
+    i++
+  ) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "confetti";
+
+
+    item.style.left =
+      Math.random() * 100 + "vw";
+
+
+    item.style.background =
+      colors[
+        Math.floor(
+          Math.random() *
+          colors.length
+        )
       ];
 
 
-      for (let i = 0; i < 80; i++) {
-
-        const piece =
-          document.createElement("div");
-
-        piece.className =
-          "confetti";
-
-        piece.style.left =
-          Math.random() * 100 + "vw";
-
-        piece.style.background =
-          colors[
-            Math.floor(
-              Math.random() * colors.length
-            )
-          ];
-
-        piece.style.animationDelay =
-          Math.random() * .8 + "s";
-
-        piece.style.width =
-          5 + Math.random() * 7 + "px";
-
-        piece.style.height =
-          8 + Math.random() * 12 + "px";
-
-        piece.style.transform =
-          `rotate(${Math.random() * 360}deg)`;
+    item.style.animationDelay =
+      Math.random() * .8 + "s";
 
 
-        document.body.appendChild(piece);
+    item.style.width =
+      5 + Math.random() * 7 + "px";
 
 
-        setTimeout(() => {
+    item.style.height =
+      8 + Math.random() * 12 + "px";
 
-          piece.remove();
 
-        }, 4500);
+    document.body.appendChild(item);
+
+
+    setTimeout(
+      () => item.remove(),
+      4500
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+ENTER = GENERATE
+=========================================
+*/
+
+document
+  .getElementById("reviewLink")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        generateQR();
 
       }
 
     }
+  );
 
-
-    /*
-      =====================================
-      ENTER KEY
-      =====================================
-    */
-
-    document
-      .getElementById("reviewLink")
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (event.key === "Enter") {
-
-            generateQR();
-
-          }
-
-        }
-      );
-
-  </script>
+</script>
 
 </body>
 </html>
