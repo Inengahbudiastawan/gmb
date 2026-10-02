@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terima Kasih - GMB Review</title>
+<title>Terima Kasih - Review Google</title>
 
-<!-- QR CODE LIBRARY GRATIS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
@@ -26,76 +25,52 @@ body{
     color:#fff;
 
     background:
-        linear-gradient(
-            rgba(3,8,22,.96),
-            rgba(2,6,18,.98)
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0,
-            transparent 39px,
-            rgba(59,130,246,.055) 40px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 39px,
-            rgba(59,130,246,.055) 40px
-        );
+        radial-gradient(circle at 75% 35%,rgba(37,99,235,.16),transparent 30%),
+        radial-gradient(circle at 20% 80%,rgba(124,58,237,.14),transparent 30%),
+        linear-gradient(135deg,#020617,#071126 55%,#030712);
 }
 
-/* BACKGROUND GLOW */
+/* BACKGROUND COMPUTER GRID */
 
-body::before{
+body:after{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
 
-    background:
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(37,99,235,.20),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 75%,
-            rgba(124,58,237,.18),
-            transparent 30%
-        );
-}
+    background-image:
+        linear-gradient(rgba(59,130,246,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(59,130,246,.035) 1px,transparent 1px);
 
-/* GRID */
+    background-size:40px 40px;
+}
 
 .line{
     position:fixed;
     background:#3b82f6;
-    opacity:.16;
+    opacity:.12;
     pointer-events:none;
 }
 
 .line.v1{
+    left:5%;
+    top:0;
     width:1px;
     height:100%;
-    left:6%;
 }
 
 .line.v2{
+    right:5%;
+    top:0;
     width:1px;
     height:100%;
-    right:6%;
 }
 
 .line.h1{
+    left:0;
+    top:13%;
     width:100%;
     height:1px;
-    top:12%;
-}
-
-.line.h2{
-    width:100%;
-    height:1px;
-    bottom:9%;
 }
 
 /* PAGE */
@@ -107,32 +82,31 @@ body::before{
     width:100%;
     height:100vh;
 
-    padding:14px 26px;
+    padding:13px 25px;
 
     display:flex;
     flex-direction:column;
 }
 
-/* TOP BAR */
+/* TOP */
 
 .topbar{
     height:36px;
     flex:0 0 36px;
 
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 
     padding:0 14px;
 
-    border-radius:9px;
+    border:1px solid rgba(148,163,184,.12);
+    border-radius:10px;
 
-    background:rgba(15,23,42,.82);
-
-    border:1px solid rgba(96,165,250,.14);
+    background:rgba(15,23,42,.78);
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.3);
+        0 10px 30px rgba(0,0,0,.25);
 }
 
 .logo{
@@ -148,23 +122,19 @@ body::before{
 }
 
 .logo-icon{
-    width:20px;
-    height:20px;
+    width:21px;
+    height:21px;
 
     display:grid;
     place-items:center;
 
-    border-radius:5px;
+    border-radius:6px;
 
     background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #7c3aed
-        );
+        linear-gradient(135deg,#2563eb,#7c3aed);
 
     box-shadow:
-        0 0 15px rgba(59,130,246,.45);
+        0 0 18px rgba(59,130,246,.45);
 }
 
 .online{
@@ -173,6 +143,7 @@ body::before{
     gap:6px;
 
     color:#86efac;
+
     font-size:8px;
 }
 
@@ -184,16 +155,12 @@ body::before{
 
     background:#22c55e;
 
-    box-shadow:
-        0 0 10px #22c55e;
+    box-shadow:0 0 10px #22c55e;
 
-    animation:
-        onlinePulse
-        1.5s
-        infinite;
+    animation:online 1.5s infinite;
 }
 
-@keyframes onlinePulse{
+@keyframes online{
     50%{
         opacity:.3;
         transform:scale(.7);
@@ -203,42 +170,44 @@ body::before{
 /* HEADER */
 
 header{
-    text-align:center;
-    padding:9px 0 8px;
     flex:0 0 auto;
+
+    text-align:center;
+
+    padding:7px 0 5px;
 }
 
 .badge{
     display:inline-block;
 
-    padding:5px 12px;
+    padding:4px 12px;
 
     border-radius:30px;
 
+    border:1px solid rgba(96,165,250,.2);
+
+    background:rgba(37,99,235,.08);
+
     color:#93c5fd;
-
-    background:rgba(37,99,235,.09);
-
-    border:
-        1px solid rgba(59,130,246,.18);
 
     font-size:8px;
     font-weight:bold;
-    letter-spacing:1px;
+
+    letter-spacing:1.2px;
 }
 
 h1{
-    margin-top:5px;
+    margin-top:4px;
 
-    font-size:
-        clamp(28px,3.5vw,43px);
+    font-size:clamp(27px,3.3vw,42px);
+    line-height:1;
 
     background:
         linear-gradient(
             90deg,
-            #fff,
-            #93c5fd,
-            #a78bfa
+            #ffffff,
+            #bfdbfe,
+            #c4b5fd
         );
 
     -webkit-background-clip:text;
@@ -250,17 +219,12 @@ h1{
 .heart{
     display:inline-block;
 
-    color:#ff304f;
+    color:#ff3150;
 
     text-shadow:
-        0 0 16px
-        rgba(255,48,79,.55);
+        0 0 14px rgba(255,49,80,.7);
 
-    animation:
-        heartBeat
-        1.1s
-        ease-in-out
-        infinite;
+    animation:heartBeat 1.1s infinite;
 }
 
 @keyframes heartBeat{
@@ -281,12 +245,72 @@ h1{
     }
 }
 
-.header-text{
+.header-sub{
     margin-top:3px;
 
-    color:#64748b;
+    color:#94a3b8;
 
-    font-size:9px;
+    font-size:10px;
+}
+
+/* BINTANG TEPAT DI BAWAH TERIMA KASIH */
+
+.header-stars{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:3px;
+
+    height:31px;
+}
+
+.header-stars span{
+    color:#fbbf24;
+
+    font-size:28px;
+    line-height:1;
+
+    text-shadow:
+        0 0 7px rgba(251,191,36,.7),
+        0 0 18px rgba(251,191,36,.35);
+
+    animation:star 1.4s ease-in-out infinite alternate;
+}
+
+.header-stars span:nth-child(1){
+    animation-delay:0s;
+}
+
+.header-stars span:nth-child(2){
+    animation-delay:.12s;
+}
+
+.header-stars span:nth-child(3){
+    animation-delay:.24s;
+}
+
+.header-stars span:nth-child(4){
+    animation-delay:.36s;
+}
+
+.header-stars span:nth-child(5){
+    animation-delay:.48s;
+}
+
+@keyframes star{
+    from{
+        transform:scale(1);
+        filter:brightness(1);
+    }
+
+    to{
+        transform:scale(1.16) translateY(-2px);
+        filter:brightness(1.35);
+    }
 }
 
 /* MAIN */
@@ -297,9 +321,7 @@ h1{
 
     display:grid;
 
-    grid-template-columns:
-        270px
-        minmax(0,1fr);
+    grid-template-columns:270px minmax(0,1fr);
 
     gap:12px;
 }
@@ -315,13 +337,11 @@ h1{
 
     padding:18px;
 
-    border-radius:15px;
+    border-radius:16px;
 
-    background:
-        rgba(15,23,42,.82);
+    background:rgba(15,23,42,.84);
 
-    border:
-        1px solid rgba(96,165,250,.12);
+    border:1px solid rgba(148,163,184,.13);
 
     box-shadow:
         0 25px 60px rgba(0,0,0,.3);
@@ -336,7 +356,7 @@ h1{
 
     font-size:8px;
 
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 
 .window span{
@@ -358,22 +378,22 @@ h1{
 }
 
 .generator h2{
-    font-size:19px;
-    margin-bottom:6px;
+    font-size:20px;
+    margin-bottom:7px;
 }
 
 .generator p{
-    color:#64748b;
+    color:#94a3b8;
 
-    font-size:10px;
+    font-size:11px;
 
-    line-height:1.55;
+    line-height:1.6;
 
     margin-bottom:18px;
 }
 
 label{
-    color:#94a3b8;
+    color:#cbd5e1;
 
     font-size:9px;
     font-weight:bold;
@@ -388,37 +408,38 @@ input{
 
     border-radius:9px;
 
+    border:1px solid #334155;
+
     outline:none;
 
     background:#020617;
 
-    border:
-        1px solid #1e293b;
+    color:#f1f5f9;
 
-    color:#e2e8f0;
-
-    font-size:10px;
+    font-size:11px;
 
     transition:.25s;
+}
+
+input::placeholder{
+    color:#475569;
 }
 
 input:focus{
     border-color:#3b82f6;
 
     box-shadow:
-        0 0 0 3px
-        rgba(59,130,246,.1);
+        0 0 0 3px rgba(59,130,246,.12);
 }
 
 .generate{
     width:100%;
 
-    margin-top:9px;
-
     padding:13px;
 
-    border:0;
+    margin-top:9px;
 
+    border:0;
     border-radius:9px;
 
     color:#fff;
@@ -436,8 +457,7 @@ input:focus{
         );
 
     box-shadow:
-        0 8px 25px
-        rgba(37,99,235,.25);
+        0 9px 25px rgba(37,99,235,.3);
 
     transition:.25s;
 }
@@ -446,8 +466,7 @@ input:focus{
     transform:translateY(-2px);
 
     box-shadow:
-        0 12px 30px
-        rgba(37,99,235,.4);
+        0 13px 32px rgba(37,99,235,.45);
 }
 
 .generate:active{
@@ -462,24 +481,20 @@ input:focus{
 
     display:grid;
 
-    grid-template-columns:
-        185px
-        minmax(0,1fr);
+    grid-template-columns:185px minmax(0,1fr);
 
     gap:12px;
 
     padding:12px;
 
-    border-radius:15px;
+    border-radius:16px;
 
-    background:
-        rgba(2,6,23,.48);
+    background:rgba(2,6,23,.48);
 
-    border:
-        1px solid rgba(96,165,250,.1);
+    border:1px solid rgba(148,163,184,.1);
 }
 
-/* QR AREA */
+/* QR */
 
 .qr-area{
     min-width:0;
@@ -487,24 +502,23 @@ input:focus{
     display:flex;
     flex-direction:column;
 
-    align-items:center;
     justify-content:center;
+    align-items:center;
 
     padding:10px;
 
-    border-radius:12px;
+    border-radius:13px;
 
-    background:
-        rgba(15,23,42,.72);
+    background:rgba(15,23,42,.75);
 
-    border:
-        1px solid rgba(96,165,250,.1);
+    border:1px solid rgba(96,165,250,.1);
 }
 
 .qr-header{
-    color:#64748b;
+    color:#94a3b8;
 
-    font-size:8px;
+    font-size:9px;
+    font-weight:bold;
 
     letter-spacing:1px;
 
@@ -514,9 +528,9 @@ input:focus{
 .qr-empty{
     text-align:center;
 
-    color:#475569;
+    color:#64748b;
 
-    font-size:9px;
+    font-size:10px;
 
     line-height:1.5;
 }
@@ -533,16 +547,12 @@ input:focus{
     background:#fff;
 
     box-shadow:
-        0 15px 35px
-        rgba(0,0,0,.5);
+        0 18px 40px rgba(0,0,0,.5);
 
-    animation:
-        qrAppear
-        .4s
-        ease-out;
+    animation:qrIn .4s ease-out;
 }
 
-@keyframes qrAppear{
+@keyframes qrIn{
     from{
         opacity:0;
         transform:scale(.8);
@@ -556,16 +566,16 @@ input:focus{
 
 #qrcode{
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 }
 
 #qrcode canvas,
 #qrcode img{
-    display:block;
-
     width:144px !important;
     height:144px !important;
+
+    display:block;
 }
 
 .qr-label{
@@ -576,7 +586,7 @@ input:focus{
     font-size:8px;
     font-weight:bold;
 
-    margin-top:4px;
+    margin-top:5px;
 }
 
 .download{
@@ -584,13 +594,12 @@ input:focus{
 
     margin-top:10px;
 
-    padding:9px 12px;
+    padding:9px 13px;
 
     border:0;
-
     border-radius:8px;
 
-    background:#e2e8f0;
+    background:#f1f5f9;
 
     color:#0f172a;
 
@@ -604,17 +613,16 @@ input:focus{
 
 .download:hover{
     background:#fff;
-
     transform:translateY(-2px);
 }
 
 /* MESSAGE */
 
 .message{
-    position:relative;
-
     min-width:0;
     min-height:0;
+
+    position:relative;
 
     display:flex;
     flex-direction:column;
@@ -625,43 +633,26 @@ input:focus{
 
     overflow:hidden;
 
-    padding:5px 8px 3px;
+    padding:0 5px;
 }
 
 .message-title{
-    font-size:20px;
-    font-weight:900;
-
-    position:relative;
-    z-index:50;
+    display:none;
 }
 
-.message-sub{
-    color:#64748b;
-
-    font-size:9px;
-
-    margin-top:3px;
-
-    position:relative;
-    z-index:50;
-}
-
-/* =========================================
-   AVATAR BESAR + ANIMASI
-========================================= */
+/* AVATAR */
 
 .avatar{
     position:relative;
 
     width:100%;
-    max-width:520px;
+    max-width:560px;
 
-    height:270px;
+    height:285px;
 
-    flex:0 0 270px;
+    flex:0 0 285px;
 
-    margin-top:0;
+    margin-top:1px;
 
     animation:
         avatarFloat
@@ -670,72 +661,62 @@ input:focus{
         infinite;
 }
 
-/* AVATAR NAIK TURUN */
-
 @keyframes avatarFloat{
-
     0%,100%{
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
 
     50%{
-        transform:
-            translateY(-6px);
+        transform:translateY(-6px);
     }
 }
 
-/* CAHAYA */
+/* GLOW */
 
 .glow{
     position:absolute;
 
-    width:210px;
-    height:210px;
+    width:225px;
+    height:225px;
 
     left:50%;
-    top:48px;
+    top:45px;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(59,130,246,.34),
+            rgba(59,130,246,.35),
             rgba(59,130,246,.08) 45%,
             transparent 70%
         );
 
     animation:
-        glowBreath
-        3s
-        ease-in-out
-        infinite;
+        glow 3s ease-in-out infinite;
 }
 
-@keyframes glowBreath{
-
+@keyframes glow{
     0%,100%{
+        opacity:.55;
+
         transform:
             translateX(-50%)
             scale(.92);
-
-        opacity:.55;
     }
 
     50%{
+        opacity:1;
+
         transform:
             translateX(-50%)
-            scale(1.13);
-
-        opacity:1;
+            scale(1.12);
     }
 }
 
-/* BALON UCAPAN */
+/* SPEECH */
 
 .speech{
     position:absolute;
@@ -743,31 +724,29 @@ input:focus{
     left:50%;
     top:0;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
-    width:min(350px,78%);
+    width:min(390px,80%);
 
-    padding:10px 15px;
+    padding:12px 17px;
 
     border-radius:
-        18px 18px 18px 5px;
+        20px 20px 20px 5px;
 
     background:#fff;
 
     color:#172033;
 
-    font-size:11px;
+    font-size:13px;
 
-    font-weight:bold;
+    font-weight:800;
 
-    line-height:1.35;
+    line-height:1.4;
 
     z-index:40;
 
     box-shadow:
-        0 12px 30px
-        rgba(0,0,0,.35);
+        0 14px 35px rgba(0,0,0,.4);
 
     animation:
         speechFloat
@@ -776,13 +755,27 @@ input:focus{
         infinite;
 }
 
-.speech::after{
+.speech small{
+    display:block;
+
+    color:#4f46e5;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    line-height:1.4;
+
+    margin-top:4px;
+}
+
+.speech:after{
     content:"";
 
     position:absolute;
 
-    left:50%;
     bottom:-7px;
+    left:50%;
 
     width:14px;
     height:14px;
@@ -794,18 +787,7 @@ input:focus{
         rotate(45deg);
 }
 
-.speech small{
-    display:block;
-
-    color:#6366f1;
-
-    font-size:8px;
-
-    margin-top:4px;
-}
-
 @keyframes speechFloat{
-
     0%,100%{
         transform:
             translateX(-50%)
@@ -819,35 +801,31 @@ input:focus{
     }
 }
 
-/* KEPALA */
+/* HEAD */
 
 .head{
     position:absolute;
 
-    width:148px;
-    height:148px;
+    width:158px;
+    height:158px;
 
     left:50%;
-    top:52px;
+    top:55px;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     border-radius:50%;
 
     background:
         linear-gradient(
             145deg,
-            #ffe1c6,
-            #f2a16f
+            #ffe4cb,
+            #efa06d
         );
 
     box-shadow:
-        inset -14px -18px 25px
-        rgba(150,60,20,.12),
-
-        0 20px 35px
-        rgba(0,0,0,.35);
+        inset -14px -18px 25px rgba(150,60,20,.12),
+        0 22px 40px rgba(0,0,0,.38);
 
     z-index:10;
 
@@ -857,16 +835,14 @@ input:focus{
         ease-in-out
         infinite;
 
-    transform-origin:
-        50% 100%;
+    transform-origin:50% 100%;
 }
 
 @keyframes headMove{
-
     0%,100%{
         transform:
             translateX(-50%)
-            rotate(0deg);
+            rotate(0);
     }
 
     25%{
@@ -882,19 +858,19 @@ input:focus{
     }
 }
 
-/* RAMBUT */
+/* HAIR */
 
 .hair{
     position:absolute;
 
-    width:154px;
-    height:70px;
+    width:164px;
+    height:74px;
 
     left:-3px;
     top:-5px;
 
     border-radius:
-        80px 80px 35px 35px;
+        85px 85px 38px 38px;
 
     background:
         linear-gradient(
@@ -911,7 +887,6 @@ input:focus{
 }
 
 @keyframes hairMove{
-
     0%,100%{
         transform:rotate(0);
     }
@@ -921,41 +896,41 @@ input:focus{
     }
 }
 
-.hair::before,
-.hair::after{
+.hair:before,
+.hair:after{
     content:"";
 
     position:absolute;
 
-    width:31px;
-    height:58px;
+    width:33px;
+    height:61px;
 
-    top:24px;
+    top:25px;
 
     background:#261835;
 
     border-radius:30px;
 }
 
-.hair::before{
+.hair:before{
     left:0;
     transform:rotate(12deg);
 }
 
-.hair::after{
+.hair:after{
     right:0;
     transform:rotate(-12deg);
 }
 
-/* MATA */
+/* EYES */
 
 .eye{
     position:absolute;
 
-    top:59px;
+    top:63px;
 
-    width:14px;
-    height:20px;
+    width:15px;
+    height:21px;
 
     border-radius:50%;
 
@@ -970,14 +945,14 @@ input:focus{
 }
 
 .eye.left{
-    left:35px;
+    left:37px;
 }
 
 .eye.right{
-    right:35px;
+    right:37px;
 }
 
-.eye::after{
+.eye:after{
     content:"";
 
     position:absolute;
@@ -994,7 +969,6 @@ input:focus{
 }
 
 @keyframes blink{
-
     0%,42%,44%,72%,74%,100%{
         transform:scaleY(1);
     }
@@ -1004,58 +978,56 @@ input:focus{
     }
 }
 
-/* PIPI */
+/* CHEEK */
 
 .cheek{
     position:absolute;
 
-    width:24px;
-    height:10px;
+    width:25px;
+    height:11px;
 
-    top:87px;
+    top:92px;
 
     border-radius:50%;
 
-    background:
-        rgba(255,70,90,.23);
+    background:rgba(255,70,90,.23);
 }
 
 .cheek.left{
-    left:13px;
+    left:14px;
 }
 
 .cheek.right{
-    right:13px;
+    right:14px;
 }
 
-/* HIDUNG */
+/* NOSE */
 
 .nose{
     position:absolute;
 
-    top:78px;
-    left:69px;
+    top:82px;
+    left:74px;
 
     width:8px;
     height:14px;
 
     border-right:
-        2px solid
-        rgba(140,70,50,.3);
+        2px solid rgba(140,70,50,.3);
 
     border-radius:50%;
 }
 
-/* SENYUM */
+/* SMILE */
 
 .smile{
     position:absolute;
 
-    top:98px;
-    left:51px;
+    top:104px;
+    left:55px;
 
-    width:46px;
-    height:22px;
+    width:48px;
+    height:23px;
 
     border-bottom:
         5px solid #a64050;
@@ -1064,14 +1036,13 @@ input:focus{
         0 0 50px 50px;
 
     animation:
-        smileMove
+        smile
         2.8s
         ease-in-out
         infinite;
 }
 
-@keyframes smileMove{
-
+@keyframes smile{
     0%,100%{
         transform:scaleX(1);
     }
@@ -1081,41 +1052,39 @@ input:focus{
     }
 }
 
-/* LEHER */
+/* NECK */
 
 .neck{
     position:absolute;
 
-    width:37px;
+    width:39px;
     height:30px;
 
     left:50%;
-    top:172px;
+    top:177px;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     background:#efa878;
 
     z-index:5;
 }
 
-/* BADAN */
+/* BODY */
 
 .body{
     position:absolute;
 
-    width:120px;
-    height:88px;
+    width:128px;
+    height:91px;
 
     left:50%;
-    top:187px;
+    top:193px;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     border-radius:
-        60px 60px 18px 18px;
+        64px 64px 18px 18px;
 
     background:
         linear-gradient(
@@ -1125,8 +1094,7 @@ input:focus{
         );
 
     box-shadow:
-        0 15px 30px
-        rgba(0,0,0,.35);
+        0 16px 32px rgba(0,0,0,.4);
 
     z-index:3;
 
@@ -1138,7 +1106,6 @@ input:focus{
 }
 
 @keyframes bodyMove{
-
     0%,100%{
         transform:
             translateX(-50%)
@@ -1152,15 +1119,15 @@ input:focus{
     }
 }
 
-/* TANGAN */
+/* HAND */
 
 .hand{
     position:absolute;
 
-    width:54px;
-    height:25px;
+    width:57px;
+    height:26px;
 
-    top:193px;
+    top:198px;
 
     border-radius:35px;
 
@@ -1175,10 +1142,9 @@ input:focus{
 }
 
 .hand.left{
-    left:calc(50% - 120px);
+    left:calc(50% - 126px);
 
-    transform:
-        rotate(-35deg);
+    transform:rotate(-35deg);
 
     animation:
         handLeft
@@ -1188,10 +1154,9 @@ input:focus{
 }
 
 .hand.right{
-    right:calc(50% - 120px);
+    right:calc(50% - 126px);
 
-    transform:
-        rotate(35deg);
+    transform:rotate(35deg);
 
     animation:
         handRight
@@ -1201,7 +1166,6 @@ input:focus{
 }
 
 @keyframes handLeft{
-
     0%,100%{
         transform:
             rotate(-35deg)
@@ -1216,7 +1180,6 @@ input:focus{
 }
 
 @keyframes handRight{
-
     0%,100%{
         transform:
             rotate(35deg)
@@ -1230,56 +1193,39 @@ input:focus{
     }
 }
 
-.hand::before{
+.hand:before{
     content:"";
 
     position:absolute;
 
-    width:32px;
-    height:36px;
+    width:34px;
+    height:38px;
 
-    top:-22px;
+    top:-23px;
 
     border-radius:
         22px 22px 13px 13px;
 
     background:#ffd1ae;
-
-    animation:
-        fingerMove
-        3.5s
-        ease-in-out
-        infinite;
 }
 
-.hand.left::before{
+.hand.left:before{
     left:3px;
 }
 
-.hand.right::before{
+.hand.right:before{
     right:3px;
 }
 
-@keyframes fingerMove{
-
-    0%,100%{
-        transform:rotate(0);
-    }
-
-    50%{
-        transform:rotate(-3deg);
-    }
-}
-
-.hand::after{
+.hand:after{
     content:"";
 
     position:absolute;
 
     width:7px;
-    height:21px;
+    height:22px;
 
-    top:-31px;
+    top:-32px;
 
     border-radius:8px;
 
@@ -1290,140 +1236,56 @@ input:focus{
         18px 0 0 #ffd1ae;
 }
 
-.hand.left::after{
+.hand.left:after{
     left:5px;
 }
 
-.hand.right::after{
+.hand.right:after{
     right:5px;
 }
 
-/* DOA */
-
-.bottom{
-    width:100%;
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:2px;
-
-    padding:0 5px;
-
-    position:relative;
-
-    z-index:50;
-}
+/* DOA / PESAN */
 
 .quote{
     position:relative;
+    z-index:50;
 
-    width:min(650px,97%);
+    width:min(760px,96%);
 
-    padding:9px 18px;
+    padding:13px 22px;
 
-    border-radius:12px;
+    border-radius:14px;
 
     background:
-        rgba(15,23,42,.90);
+        linear-gradient(
+            135deg,
+            rgba(15,23,42,.96),
+            rgba(18,31,58,.92)
+        );
 
     border:
-        1px solid
-        rgba(96,165,250,.16);
+        1px solid rgba(96,165,250,.2);
 
-    color:#d1d5db;
+    color:#e2e8f0;
 
-    font-size:11px;
+    font-size:14px;
 
     line-height:1.55;
+
+    font-weight:500;
 
     text-align:center;
 
     box-shadow:
-        0 8px 20px
-        rgba(0,0,0,.2);
+        0 12px 28px rgba(0,0,0,.25);
 }
 
 .quote strong{
     color:#bfdbfe;
 }
 
-/* BINTANG */
-
-.stars{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:5px;
-
-    height:37px;
-
-    color:#fbbf24;
-
-    font-size:31px;
-
-    line-height:1;
-
-    text-shadow:
-        0 0 8px
-        rgba(251,191,36,.6),
-
-        0 0 18px
-        rgba(251,191,36,.25);
-}
-
-.stars span{
-    display:block;
-
-    animation:
-        starGlow
-        1.5s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-.stars span:nth-child(1){
-    animation-delay:0s;
-}
-
-.stars span:nth-child(2){
-    animation-delay:.15s;
-}
-
-.stars span:nth-child(3){
-    animation-delay:.3s;
-}
-
-.stars span:nth-child(4){
-    animation-delay:.45s;
-}
-
-.stars span:nth-child(5){
-    animation-delay:.6s;
-}
-
-@keyframes starGlow{
-
-    from{
-        transform:
-            scale(1)
-            rotate(0);
-
-        filter:brightness(1);
-    }
-
-    to{
-        transform:
-            scale(1.15)
-            rotate(4deg);
-
-        filter:brightness(1.35);
-    }
+.quote .red{
+    color:#fda4af;
 }
 
 /* FOOTER */
@@ -1433,11 +1295,11 @@ footer{
 
     text-align:center;
 
+    padding-top:3px;
+
     color:#475569;
 
     font-size:8px;
-
-    padding-top:5px;
 }
 
 /* MOBILE */
@@ -1487,36 +1349,30 @@ footer{
     }
 
     .message{
-        order:1;
-
-        min-height:570px;
+        min-height:610px;
     }
 
     .qr-area{
-        order:2;
-
-        min-height:200px;
+        min-height:210px;
     }
 
     .avatar{
         transform:scale(.82);
+        transform-origin:top center;
 
-        transform-origin:
-            top center;
-
-        margin-bottom:-42px;
+        margin-bottom:-48px;
     }
 
     .quote{
         width:96%;
 
-        font-size:10px;
+        padding:12px 14px;
 
-        line-height:1.5;
+        font-size:11px;
     }
 
-    .stars{
-        font-size:29px;
+    .header-stars span{
+        font-size:25px;
     }
 }
 
@@ -1525,8 +1381,8 @@ footer{
 @media(prefers-reduced-motion:reduce){
 
     *,
-    *::before,
-    *::after{
+    *:before,
+    *:after{
         animation-duration:.01ms !important;
         animation-iteration-count:1 !important;
         transition:none !important;
@@ -1540,266 +1396,48 @@ footer{
 <div class="line v1"></div>
 <div class="line v2"></div>
 <div class="line h1"></div>
-<div class="line h2"></div>
 
 <div class="page">
 
-<!-- TOP BAR -->
+    <!-- TOP BAR -->
 
-<div class="topbar">
+    <div class="topbar">
 
-    <div class="logo">
+        <div class="logo">
 
-        <div class="logo-icon">
-            ✦
+            <div class="logo-icon">✦</div>
+
+            GMB REVIEW SYSTEM
+
         </div>
 
-        GMB REVIEW SYSTEM
+        <div class="online">
 
-    </div>
+            <i></i>
 
-    <div class="online">
+            SYSTEM ONLINE
 
-        <i></i>
-
-        SYSTEM ONLINE
-
-    </div>
-
-</div>
-
-
-<!-- HEADER -->
-
-<header>
-
-    <div class="badge">
-        GOOGLE BUSINESS REVIEW
-    </div>
-
-    <h1>
-        Terima Kasih
-        <span class="heart">♥</span>
-    </h1>
-
-    <p class="header-text">
-        Setiap ulasan Anda sangat berarti bagi kami.
-    </p>
-
-</header>
-
-
-<!-- MAIN -->
-
-<div class="main">
-
-
-<!-- GENERATOR -->
-
-<section class="generator">
-
-    <div class="window">
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-        &nbsp; review-generator.html
-
-    </div>
-
-
-    <h2>
-        🔗 QR Review
-    </h2>
-
-
-    <p>
-        Masukkan link review Google Business
-        untuk membuat QR Code.
-    </p>
-
-
-    <label for="reviewLink">
-        LINK REVIEW GOOGLE
-    </label>
-
-
-    <input
-        id="reviewLink"
-        type="text"
-        placeholder="g.page/r/xxxxx/review"
-        autocomplete="off"
-    >
-
-
-    <button
-        class="generate"
-        onclick="generateQR()"
-    >
-        ✨ BUAT QR CODE
-    </button>
-
-</section>
-
-
-<!-- RIGHT CONTENT -->
-
-<section class="content">
-
-
-<!-- QR AREA -->
-
-<aside class="qr-area">
-
-    <div class="qr-header">
-        QR REVIEW
-    </div>
-
-
-    <div
-        class="qr-empty"
-        id="qrEmpty"
-    >
-        QR Code akan<br>
-        muncul di sini
-    </div>
-
-
-    <div
-        class="qr-card"
-        id="qrCard"
-    >
-
-        <div id="qrcode"></div>
-
-        <div class="qr-label">
-            SCAN UNTUK REVIEW
         </div>
 
     </div>
 
 
-    <button
-        class="download"
-        id="downloadBtn"
-        onclick="downloadQR()"
-    >
-        📥 DOWNLOAD QR
-    </button>
+    <!-- HEADER -->
 
-</aside>
+    <header>
 
-
-<!-- MESSAGE -->
-
-<section class="message">
-
-
-    <div class="message-title">
-
-        Terima Kasih Sudah Mereview
-
-        <span class="heart">
-            ♥
-        </span>
-
-    </div>
-
-
-    <div class="message-sub">
-        Dukungan Anda sangat berarti bagi kami
-    </div>
-
-
-    <!-- AVATAR -->
-
-    <div class="avatar">
-
-
-        <!-- GLOW -->
-
-        <div class="glow"></div>
-
-
-        <!-- BALON -->
-
-        <div class="speech">
-
-            🙏 Terima kasih sudah
-            memberikan review positif!
-
-            <small>
-
-                Semoga selalu sehat,
-                bahagia, murah rezeki,
-                dan dimudahkan dalam
-                segala urusan. ❤️
-
-            </small>
-
+        <div class="badge">
+            GOOGLE BUSINESS REVIEW
         </div>
 
+        <h1>
+            Terima Kasih
+            <span class="heart">♥</span>
+        </h1>
 
-        <!-- BADAN -->
+        <!-- 5 BINTANG TEPAT DI BAWAH JUDUL -->
 
-        <div class="body"></div>
-
-
-        <!-- LEHER -->
-
-        <div class="neck"></div>
-
-
-        <!-- KEPALA -->
-
-        <div class="head">
-
-            <div class="hair"></div>
-
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-
-            <div class="cheek left"></div>
-            <div class="cheek right"></div>
-
-            <div class="nose"></div>
-
-            <div class="smile"></div>
-
-        </div>
-
-
-        <!-- TANGAN -->
-
-        <div class="hand left"></div>
-        <div class="hand right"></div>
-
-    </div>
-
-
-    <!-- DOA -->
-
-    <div class="bottom">
-
-        <div class="quote">
-
-            “<strong>
-            Semoga Anda selalu diberikan
-            kesehatan, kebahagiaan, rezeki yang
-            berlimpah, serta kemudahan dalam
-            setiap langkah.
-            </strong>
-
-            Terima kasih sudah menjadi
-            bagian dari perjalanan kami.”
-
-        </div>
-
-
-        <!-- BINTANG -->
-
-        <div class="stars">
+        <div class="header-stars">
 
             <span>★</span>
             <span>★</span>
@@ -1809,58 +1447,224 @@ footer{
 
         </div>
 
+        <p class="header-sub">
+            Terima kasih atas kepercayaan dan dukungan Anda
+        </p>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+
+        <!-- PANEL QR -->
+
+        <section class="generator">
+
+            <div class="window">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+                &nbsp; review-generator.html
+
+            </div>
+
+            <h2>
+                🔗 QR Review
+            </h2>
+
+            <p>
+                Masukkan link review Google Business
+                untuk membuat QR Code secara instan.
+            </p>
+
+            <label for="reviewLink">
+                LINK REVIEW GOOGLE
+            </label>
+
+            <input
+                id="reviewLink"
+                type="text"
+                placeholder="https://g.page/r/xxxxx/review"
+                autocomplete="off"
+            >
+
+            <button
+                class="generate"
+                onclick="generateQR()"
+            >
+                ✨ BUAT QR CODE
+            </button>
+
+        </section>
+
+
+        <!-- AREA KANAN -->
+
+        <section class="content">
+
+
+            <!-- QR CODE DI KIRI -->
+
+            <aside class="qr-area">
+
+                <div class="qr-header">
+                    SCAN REVIEW
+                </div>
+
+                <div
+                    class="qr-empty"
+                    id="qrEmpty"
+                >
+                    QR Code akan<br>
+                    muncul di sini
+                </div>
+
+                <div
+                    class="qr-card"
+                    id="qrCard"
+                >
+
+                    <div id="qrcode"></div>
+
+                    <div class="qr-label">
+                        SCAN UNTUK REVIEW
+                    </div>
+
+                </div>
+
+                <button
+                    class="download"
+                    id="downloadBtn"
+                    onclick="downloadQR()"
+                >
+                    📥 DOWNLOAD QR
+                </button>
+
+            </aside>
+
+
+            <!-- AVATAR -->
+
+            <section class="message">
+
+
+                <div class="avatar">
+
+                    <div class="glow"></div>
+
+
+                    <!-- UCAPAN -->
+
+                    <div class="speech">
+
+                        🙏 Terima kasih sudah
+                        memberikan review positif!
+
+                        <small>
+                            Dukungan Anda sangat berarti
+                            bagi perjalanan kami. ❤️
+                        </small>
+
+                    </div>
+
+
+                    <!-- BADAN -->
+
+                    <div class="body"></div>
+
+                    <div class="neck"></div>
+
+
+                    <!-- KEPALA -->
+
+                    <div class="head">
+
+                        <div class="hair"></div>
+
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+
+                        <div class="cheek left"></div>
+                        <div class="cheek right"></div>
+
+                        <div class="nose"></div>
+
+                        <div class="smile"></div>
+
+                    </div>
+
+
+                    <!-- TANGAN -->
+
+                    <div class="hand left"></div>
+                    <div class="hand right"></div>
+
+                </div>
+
+
+                <!-- DOA -->
+
+                <div class="quote">
+
+                    “<strong>
+                    Semoga Anda selalu diberikan kesehatan,
+                    kebahagiaan, rezeki yang berlimpah,
+                    serta kemudahan dalam setiap langkah.
+                    </strong>
+
+                    <br>
+
+                    Terima kasih sudah menjadi bagian
+                    dari perjalanan kami.
+
+                    <span class="red">❤️</span>
+
+                </div>
+
+            </section>
+
+        </section>
+
     </div>
 
-</section>
 
-</section>
-
-</div>
-
-
-<footer>
-    FREE • NO LOGIN • NO DATABASE
-</footer>
+    <footer>
+        FREE • NO LOGIN • NO DATABASE
+    </footer>
 
 </div>
 
 
 <script>
 
-/* =====================================
-   GENERATE QR CODE
-===================================== */
+/* =========================================
+   BUAT QR CODE
+========================================= */
 
 function generateQR(){
 
     const input =
-        document.getElementById(
-            "reviewLink"
-        );
+        document.getElementById("reviewLink");
 
     let link =
         input.value.trim();
 
-
     const qr =
-        document.getElementById(
-            "qrcode"
-        );
+        document.getElementById("qrcode");
 
     const qrCard =
-        document.getElementById(
-            "qrCard"
-        );
+        document.getElementById("qrCard");
 
     const qrEmpty =
-        document.getElementById(
-            "qrEmpty"
-        );
+        document.getElementById("qrEmpty");
 
     const download =
-        document.getElementById(
-            "downloadBtn"
-        );
+        document.getElementById("downloadBtn");
 
 
     if(!link){
@@ -1875,11 +1679,7 @@ function generateQR(){
     }
 
 
-    /*
-       Jika pengguna memasukkan
-       g.page/... tanpa https,
-       otomatis ditambahkan.
-    */
+    /* Tambahkan HTTPS otomatis */
 
     if(
         !link.startsWith("http://") &&
@@ -1888,9 +1688,10 @@ function generateQR(){
 
         link =
             "https://" + link;
-
     }
 
+
+    /* Periksa URL */
 
     try{
 
@@ -1906,7 +1707,7 @@ function generateQR(){
     }
 
 
-    /* Hapus QR lama */
+    /* Bersihkan QR sebelumnya */
 
     qr.innerHTML = "";
 
@@ -1929,13 +1730,12 @@ function generateQR(){
 
             correctLevel:
                 QRCode.CorrectLevel.H
-
         }
 
     );
 
 
-    /* Tampilkan */
+    /* Tampilkan hasil */
 
     qrEmpty.style.display =
         "none";
@@ -1945,13 +1745,12 @@ function generateQR(){
 
     download.style.display =
         "block";
-
 }
 
 
-/* =====================================
+/* =========================================
    DOWNLOAD QR
-===================================== */
+========================================= */
 
 function downloadQR(){
 
@@ -1975,9 +1774,7 @@ function downloadQR(){
 
 
     const output =
-        document.createElement(
-            "canvas"
-        );
+        document.createElement("canvas");
 
 
     output.width =
@@ -1995,7 +1792,7 @@ function downloadQR(){
         output.getContext("2d");
 
 
-    /* Background putih */
+    /* Background */
 
     ctx.fillStyle =
         "#ffffff";
@@ -2017,7 +1814,7 @@ function downloadQR(){
     );
 
 
-    /* Tulisan */
+    /* Label */
 
     ctx.fillStyle =
         "#111827";
@@ -2028,7 +1825,6 @@ function downloadQR(){
     ctx.textAlign =
         "center";
 
-
     ctx.fillText(
         "Scan untuk memberikan review",
         output.width / 2,
@@ -2038,25 +1834,22 @@ function downloadQR(){
 
     /* Download */
 
-    const a =
+    const link =
         document.createElement("a");
 
-    a.download =
+    link.download =
         "QR-Review-GMB.png";
 
-    a.href =
-        output.toDataURL(
-            "image/png"
-        );
+    link.href =
+        output.toDataURL("image/png");
 
-    a.click();
-
+    link.click();
 }
 
 
-/* =====================================
-   ENTER UNTUK BUAT QR
-===================================== */
+/* =========================================
+   ENTER = BUAT QR
+========================================= */
 
 document
     .getElementById("reviewLink")
